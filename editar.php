@@ -26,23 +26,34 @@ if (isset($_POST['enviar'])){
             "email" => $_POST['email'],
             "paginaWeb" => $_POST['paginaWeb']
         ];
-        echo  $alumno['id'];
-        echo  $alumno['nombre'];
-        echo  $alumno['apellido'];
-        echo  $alumno['edad'];
-        echo  $alumno['numContacto'];
-        echo  $alumno['email'];
-        echo  $alumno['paginaWeb'];
+
         $consultaSQL = "UPDATE alumnos SET 
-                   nombre=:nombre,
-                   apellido=:apellido,
-                   edad=:edad,
-                   numContacto=:numContacto,
-                   email=: email,
-                   paginaWeb=:paginaWeb,
-                   updated_at = NOW() WHERE id =: id" ;
+                   nombre = '".$alumno['nombre']."',
+                   apellido = '".$alumno['apellido']."',
+                   edad = ".$alumno['edad'].",
+                   numContacto = ".$alumno['numContacto'].",
+                   email = '".$alumno['email']."',
+                   paginaWeb = '".$alumno['paginaWeb']."'
+        
+                   WHERE id = ".$alumno['id']. ";" ;
         $consulta = $conexion->prepare($consultaSQL);
-        $consulta->execute($alumno);
+        $consulta->execute();
+
+if (isset($_POST['submit']) && !$resultado['error']) {
+    ?>
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert">
+                    El alumno ha sido actualizado correctamente
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+
 
     }catch (PDOException $error){
         $resultado['error']=true;
@@ -88,21 +99,7 @@ if ($resultado['error']) {
     <?php
 }
 ?>
-<?php
-if (isset($_POST['submit']) && !$resultado['error']) {
-    ?>
-    <div class="container mt-2">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-success" role="alert">
-                    El alumno ha sido actualizado correctamente
-                </div>
-            </div>
-        </div>
-    </div>
-    <?php
-}
-?>
+
 <?php
 if(isset($alumno) && $alumno){
     ?>

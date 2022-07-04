@@ -121,7 +121,7 @@ if ($error) {
                             <td><?php echo escape($fila['email']);?></td>
                             <td><?php echo escape($fila['paginaWeb']);?></td>
                             <td>
-                                <a href="<?= 'borrar.php?id=' . escape($fila["id"]) ?>">🗑️Borrar</a>
+                                <a href="<?= 'borrar.php?id=' . escape($fila["id"]) ?>" . >🗑️  Borrar</a>
                                 <a href="<?= 'editar.php?id=' . escape($fila["id"]) ?>" . >✏️Editar</a>
                             </td>
                             <td></td>
